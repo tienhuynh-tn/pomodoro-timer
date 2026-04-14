@@ -1,0 +1,182 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+}
+
+/* Mode Selector */
+.mode-selector {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.mode-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mode-btn.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.app-container.focus .mode-btn.active {
+  color: var(--focus-color);
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.app-container.shortBreak .mode-btn.active {
+  color: var(--break-color);
+  background: rgba(46, 213, 115, 0.1);
+}
+
+.app-container.longBreak .mode-btn.active {
+  color: var(--long-break-color);
+  background: rgba(30, 144, 255, 0.1);
+}
+
+/* Timer Display */
+.timer-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-display {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Glowing softly */
+  box-shadow: 0 0 40px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.02);
+}
+
+.timer-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.timer-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+}
+
+.timer-circle-progress {
+  fill: none;
+  transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.timer-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time {
+  font-size: 5.5rem;
+  font-weight: 300;
+  letter-spacing: -2px;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Controls */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 3rem;
+  border-radius: 9999px;
+}
+
+.control-btn {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.control-btn:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.play-btn {
+  width: 72px;
+  height: 72px;
+  background: var(--text-primary);
+  color: var(--bg-color);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+  background: var(--text-primary);
+  color: var(--bg-color);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+}
+
+.play-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.play-icon {
+  margin-left: 4px; /* optical center fix for play icon */
+}
+
+/* Background state color overrides */
+body {
+  transition: background-color 1s ease;
+}
+
+/* Optional: change the ambient orbs slightly depending on active mode */
+.app-container.focus ~ *::before { opacity: 0.2; }
+.app-container.shortBreak ~ *::after { opacity: 0.2; background: var(--break-color); }
+.app-container.longBreak ~ *::after { opacity: 0.2; background: var(--long-break-color); }
