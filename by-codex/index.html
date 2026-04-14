@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiet Focus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <img
+      class="backdrop-photo"
+      src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
+      alt="Soft morning workspace"
+    />
+
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Quiet Focus</p>
+          <h1>Make room for one good stretch of work.</h1>
+        </div>
+        <div class="today-block">
+          <p class="today-label">Today</p>
+          <p id="todayDate" class="today-date"></p>
+        </div>
+      </header>
+
+      <main class="app-grid">
+        <section class="timer-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Session</p>
+              <h2 id="modeTitle">Focus</h2>
+            </div>
+            <p id="modeHint" class="panel-note"></p>
+          </div>
+
+          <div class="mode-tabs" role="tablist" aria-label="Pomodoro modes">
+            <button class="mode-tab is-active" data-mode="focus" role="tab" aria-selected="true">
+              Focus
+            </button>
+            <button class="mode-tab" data-mode="shortBreak" role="tab" aria-selected="false">
+              Short break
+            </button>
+            <button class="mode-tab" data-mode="longBreak" role="tab" aria-selected="false">
+              Long break
+            </button>
+          </div>
+
+          <div class="timer-stage">
+            <div class="progress-ring" aria-hidden="true">
+              <svg viewBox="0 0 220 220">
+                <circle class="ring-track" cx="110" cy="110" r="92"></circle>
+                <circle id="progressCircle" class="ring-progress" cx="110" cy="110" r="92"></circle>
+              </svg>
+              <div class="timer-copy">
+                <p id="timeLabel" class="time-label">Ready</p>
+                <p id="timerDisplay" class="timer-display">25:00</p>
+                <p id="nextLabel" class="timer-subtext">Short break after this round</p>
+              </div>
+            </div>
+
+            <div class="controls">
+              <button id="toggleTimer" class="button button-primary" type="button">Start</button>
+              <button id="resetTimer" class="button button-secondary" type="button">Reset</button>
+              <button id="skipTimer" class="button button-ghost" type="button">Skip</button>
+            </div>
+          </div>
+
+          <form id="intentionForm" class="intention-form">
+            <label for="intentionInput">Current intention</label>
+            <div class="intention-row">
+              <input
+                id="intentionInput"
+                name="intention"
+                type="text"
+                maxlength="90"
+                placeholder="Finish the draft, review the API, clear inbox zero..."
+              />
+              <button class="button button-secondary" type="submit">Save</button>
+            </div>
+            <p id="intentionOutput" class="intention-output">No intention set yet.</p>
+          </form>
+        </section>
+
+        <section class="side-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Flow</p>
+              <h2>Task list</h2>
+            </div>
+            <p id="taskSummary" class="panel-note"></p>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <input id="taskInput" name="task" type="text" maxlength="80" placeholder="Add one next action" />
+            <button class="button button-primary" type="submit">Add</button>
+          </form>
+
+          <ul id="taskList" class="task-list" aria-live="polite"></ul>
+        </section>
+
+        <section class="side-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Rhythm</p>
+              <h2>Session settings</h2>
+            </div>
+            <p class="panel-note">Tune the lengths to match your pace.</p>
+          </div>
+
+          <div class="settings-grid">
+            <label class="setting-field" for="focusMinutes">
+              <span>Focus minutes</span>
+              <input id="focusMinutes" type="number" min="1" max="90" inputmode="numeric" />
+            </label>
+            <label class="setting-field" for="shortBreakMinutes">
+              <span>Short break</span>
+              <input id="shortBreakMinutes" type="number" min="1" max="30" inputmode="numeric" />
+            </label>
+            <label class="setting-field" for="longBreakMinutes">
+              <span>Long break</span>
+              <input id="longBreakMinutes" type="number" min="1" max="45" inputmode="numeric" />
+            </label>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-block">
+              <p class="stat-label">Focus sessions</p>
+              <p id="focusCount" class="stat-value">0</p>
+            </article>
+            <article class="stat-block">
+              <p class="stat-label">Focused minutes</p>
+              <p id="focusMinutesTotal" class="stat-value">0</p>
+            </article>
+            <article class="stat-block">
+              <p class="stat-label">Tasks done</p>
+              <p id="tasksDoneCount" class="stat-value">0</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
